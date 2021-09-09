@@ -7,9 +7,54 @@
     <title>function hosting</title>
 </head>
 <body>
-    
+    <!--
+        定义函数的方法:
+        函数声明(Function Declaration)
+        函数表达式Function Expression)
+        new Function构造函数
+    -->
+    <!--
+        函数声明提前：
+        函数声明是在预执行期执行的，就是说函数声明是在浏览器准备执行代码的时候执行的。
+        因为函数声明在预执行期被执行，所以到了执行期，函数声明就不再执行
+    -->
 </body>
 <script>
-    
+    // 函数声明
+    function functionName (arg1, arg2) {
+        // function body
+    }
+
+    //函数表达式
+    // 第一种 无函数名
+    var  variable1 = function(arg1, arg2){
+        // function body
+    }
+    // 第二种 有函数名--可用来递归
+    var variable2 = function functionName(arg1, arg2){
+        // function body
+    }
+
+    //new Function 构造函数
+    // 函数可以通过内置的 JavaScript 函数构造器 Function() 定义。
+    var newFun = new Function('a','b','return a + b')
+    var x = newFun(3, 4)
+    console.log(x);
+
+    // 函数声明提前的时候，函数声明和函数体均被提前了
+    hostingTest1()
+    // Uncaught TypeError:hostingTest2 is not a function
+    // undefined 原理上是变量的提升，而非函数提升
+    // 把函数对象（值）赋值给一个变量
+    // hostingTest2()
+    function hostingTest1(){
+        console.log('函数声明');
+    }
+    var hostingTest2 = function(){
+        console.log('函数表达式');
+    }
+
+    console.log(parseInt('15,123',10));
+    console.log(typeof(parseInt('x')));
 </script>
 </html>

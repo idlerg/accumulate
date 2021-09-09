@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>parseInt</title>
+</head>
+<body>
+    <!--
+        语法：
+        parseInt(string, radix)
+        解析一个字符串并返回指定基数的十进制整数， radix 是2-36之间的整数，表示被解析字符串的基数。
+    -->
+    <!--
+        参数：
+        string
+        要被解析的值。如果参数不是一个字符串，则将其转换为字符串(使用  ToString 抽象操作)
+        字符串开头的空白符将会被忽略
+        radix 可选
+        从 2 到 36，表示字符串的基数。例如指定 16 表示被解析值是十六进制数。请注意，10不是默认值！
+    -->
+    <!--
+        返回值：
+        从给定的字符串中解析出的一个整数。
+        或者 NaN，当
+        radix 小于 2 或大于 36 ，或
+        第一个非空格字符不能转换为数字
+    -->
+</body>
+<script>
+    console.log(parseInt('10xie',10));
+    console.log([1,2,3].map(parseInt));
+
+    function testMap(a,b){
+        return a+b
+    }
+    function testFilter(a,b){
+        return a>1
+    }
+
+    [1,2,3].map((ele,index) => {
+        console.log(parseInt(ele,index))
+    })
+    console.log([1,2,3].map(testMap));
+    [1,2,3].map(function callback(element,index, arr){
+        return (element + 10)
+    })
+
+    console.log([1,2,3].filter(testFilter));
+
+    var varTest = function(a,b){
+        return a>2
+    }
+    console.log([1,2,3].filter(varTest));
+
+</script>
+</html>

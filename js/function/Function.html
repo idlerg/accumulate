@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function() 构造函数</title>
+</head>
+<body>
+    <!--
+        每个 JavaScript 函数实际上都是一个 Function 对象。运行 (function(){}).constructor === Function // true 便可以得到这个结论。
+    -->
+    <!--
+        Function 构造函数创建一个新的 Function 对象。
+        直接调用此构造函数可用动态创建函数，但会遇到和 eval 类似的的安全问题和(相对较小的)性能问题。
+        然而，与 eval 不同的是，Function 创建的函数只能在全局作用域中运行
+    -->
+    <!-- new Function ([arg1[, arg2[, ...argN]],] functionBody) -->
+</body>
+<script>
+    console.log((function(){}).constructor); // Function() { [native code] }
+    console.log(Function);                   // Function() { [native code] }
+    console.log((function(){}).constructor === Function); // true
+
+    var sum = new Function('a','b','return a + b')
+    console.log(sum(3, 4));
+</script>
+</html>
