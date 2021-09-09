@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>array</title>
+</head>
+<body>
+    <div class="main">
+        <h3>array</h3>
+    </div>
+</body>
+<script>
+    // for循环
+    // forEach map every some filter
+
+    // 一、forEach
+    // arr.forEach(callback(currentValue [, index [, array]])[, thisArg])
+    /*
+        普通的for循环
+        不会改变元素组，但不排除callback改变原数组的值
+        除了抛出异常，没有办法中途跳出循环
+        如果需要改变this指向，使用箭头函数无效（每次循环在回调函数被调用的时候，this都会指向forEach的第二个参数）
+    */
+    let arr = [1,45,66,78,10,21,50]
+    arr.forEach(function(ele,index,arr){
+        // console.log(ele,index,arr);
+        // console.log(this);
+    },arr)
+
+    // // 自定义forEach
+    // function foreachs(arrs,callback,oThis){
+    //     for (let i = 0; i < arrs.length; i++) {
+    //         callback.apply(oThis,[arrs[i], i, arrs])
+    //     }
+    // }
+    // // 自定义forEach调用
+    // foreachs(arr, function(ele,index,arr){
+    //     console.log(ele,index,arr);
+    //     console.log(this);
+    // },10)
+
+    // 二、 map
+    /*
+        var new_array = arr.map(function callback(currentValue[, index[, array]]) {
+            Return element for new_array
+        }[, thisArg])
+        创建一个新数组，其结果是该数组中的每个元素是调用一次提供的函数后的返回值。
+        一个由原数组每个元素执行回调函数的结果组成的新数组。
+        通常情况下，map 方法中的 callback 函数只需要接受一个参数，就是正在被遍历的数组元素本身。
+        但这并不意味着 map 只给 callback 传了一个参数。这个思维惯性可能会让我们犯一个很容易犯的错误。
+        我们期望输出 [1, 2, 3], 而实际结果是 [1, NaN, NaN].
+   */
+    var numbers = [1, 4, 9];
+    var roots = numbers.map(Math.sqrt);
+    ["1", "2", "3"].map(parseInt);
+    //三、 every
+    //arr.every(callback(element[, index[, array]])[, thisArg])
+    /*
+        测试一个数组内的所有元素是否都能通过某个指定函数的测试（循环只要有一个不符合 立马返回false）
+        返回一个布尔值
+        不会改变原数组
+        空数组会返回true，无条件正确
+    */
+    function isBigEnough(element, index, array) {
+        return element >= 10;
+    }
+    [12, 5, 8, 130, 44].every(isBigEnough);   // false
+    [12, 54, 18, 130, 44].every(isBigEnough); // true
+
+    // 箭头函数
+    [12, 5, 8, 130, 44].every(x => x >= 10); // false
+    [12, 54, 18, 130, 44].every(x => x >= 10); // true
+
+    // 四、some
+    // arr.some(callback(element[, index[, array]])[, thisArg])
+    /*
+        测试数组中是不是至少有1个元素通过了被提供的函数测试
+        所有元素都没有通过回调函数的测试返回值才会为false。
+        它返回的是一个Boolean类型的值
+        不改变原数组
+    */
+
+    [2, 5, 8, 1, 4].some(x => x > 10);  // false
+    [12, 5, 8, 1, 4].some(x => x > 10); // true
+
+    // 五、filter
+    // var newArray = arr.filter(callback(element[, index[, array]])[, thisArg])
+    /*
+        创建一个新数组, 其包含通过所提供函数实现的测试的所有元素
+        一个新的、由通过测试的元素组成的数组，如果没有任何数组元素通过测试，则返回空数组（需要变量接收）
+        不会改变原数组，它返回过滤后的新数组
+    */
+    function isBigEnough(element) {
+        return element >= 10;
+    }
+    var filtered = [12, 5, 8, 130, 44].filter(isBigEnough);
+    // filtered is [12, 130, 44]
+</script>
+</html>

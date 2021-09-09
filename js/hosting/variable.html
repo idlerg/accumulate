@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>variable hosting</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /*
+        变量声明的提升是以变量所处的第一层词法作用域为“单位”的，
+        即全局作用域中声明的变量会提升至全局最顶层，函数内声明的变量只会提升至该函数作用域最顶层。
+    */
+    console.log(a);
+    var a = 'a'
+    var goo = () => {
+        // undefined 全局变量会被局部作用域中的同名变量覆盖
+        // 如果在局部作用域中没有定义跟全局同名的变量。则输出全局作用域的赋值
+        console.log(a);
+        var a = 'b'
+        console.log(a);
+    }
+    goo()
+    console.log(a);
+
+
+    // ES6的优化
+    /*
+        ES6新增了let和const关键字，使得js也有了“块”级作用域
+        而且使用let和const 声明的变量和函数是不存在提升现象的
+        比较有利于我们养成良好的编程习惯。
+    */
+</script>
+</html>

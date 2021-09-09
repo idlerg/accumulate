@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>defineProperty</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /*
+        直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。
+        应当直接在 Object 构造器对象上调用此方法，而不是在任意一个 Object 类型的实例上调用。
+     */
+    let obj = {x: 1}
+    Object.defineProperty(obj, 'property1', {
+        value: 42,
+        writable: false
+    });
+    console.log(obj);
+</script>
+</html>
