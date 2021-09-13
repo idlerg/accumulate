@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blob</title>
+</head>
+<body>
+    <!--
+
+    -->
+</body>
+<script>
+    let blob = new Blob()
+    console.log(typeof(blob));  // object
+    console.log(blob);          // Blob {size: 0, type: ''}
+    /*
+        Blob.size 只读
+            Blob对象中所包含数据的大小（字节）
+        Blob.type 只读
+            一个字符串，表明该 Blob 对象所包含数据的 MIME 类型。如果类型未知，则该值为空字符串。
+    */
+</script>
+</html>
