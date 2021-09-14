@@ -97,5 +97,28 @@
     }
     var filtered = [12, 5, 8, 130, 44].filter(isBigEnough);
     // filtered is [12, 130, 44]
+
+    let file = {
+        name: '测试',
+        url: 'dsjakfjaskfj;sdsafds'
+    }
+    let fileArr = [{
+        fileName: '测试',
+        url: 'dsjakfjaskfj;sdsafds'
+    },{
+        fileName: '测试2222',
+        url: 'dsjakfjaskfj;sdsafds'
+    },{
+        fileName: '测试444',
+        url: 'dsjakfjaskfj;sdsafds'
+    }]
+    let newFileArr = fileArr.filter(ele=> {
+        console.log(ele.fileName);
+        console.log(file.name);
+        return ele.fileName != file.name
+    })
+    console.log(fileArr);       // 不变
+    console.log(newFileArr);    // 需要的数据
+
 </script>
 </html>
