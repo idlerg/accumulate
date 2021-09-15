@@ -111,6 +111,9 @@
     },{
         fileName: '测试444',
         url: 'dsjakfjaskfj;sdsafds'
+    },{
+        fileName: '测试88989',
+        url: 'dsjakfjaskfj;sdsafds'
     }]
     let newFileArr = fileArr.filter(ele=> {
         console.log(ele.fileName);
@@ -119,6 +122,9 @@
     })
     console.log(fileArr);       // 不变
     console.log(newFileArr);    // 需要的数据
+    console.log('---');
+    let newSlice = fileArr.slice(-1)
+    console.log(newSlice);
 
 </script>
 </html>
