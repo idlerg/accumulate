@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--
+        Date：
+        创建一个 JavaScript Date 实例，该实例呈现时间中的某个时刻。Date 对象则基于 Unix Time Stamp，即自1970年1月1日（UTC）起经过的毫秒数。
+     -->
+     <!--
+        方法
+            Date.now()
+            Date.parse()
+            Date.UTC()
+            Date.prototype[@@toPrimitive]
+            Date.prototype.getFullYear()
+            Date.prototype.getDate()
+      -->
+</body>
+<script text="javascript/text" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script>
+    // Date.now() 返回自 1970-1-1 00:00:00  UTC（世界标准时间）至今所经过的毫秒数。
+    console.log(Date.now());                // 1631781377037
+
+    // Date.parse() 解析一个表示日期的字符串，并返回从 1970-1-1 00:00:00 所经过的毫秒数。
+    console.log(Date.parse('2021.09.16'));  // 1631721600000
+
+    // Date.UTC() 接受和构造函数最长形式的参数相同的参数（从2到7），并返回从 1970-01-01 00:00:00 UTC 开始所经过的毫秒数。
+    console.log(Date.UTC(2021,09,16,11,12,13,55));  // 1634382733055
+
+    // Date.prototype[@@toPrimitive] 方法可以转换一个 Date 对象到一个原始值，可以返回 string 或 number 类型。
+    // console.log(Date.prototype[@@toPrimitive]('2021'));
+
+    /*
+        时间获取
+        Date.prototype.getTime()                    返回一个时间的格林威治时间数值。
+        Date.prototype.getTimezoneOffset()          返回协调世界时（UTC）相对于当前时区的时间差值，单位为分钟。
+
+        date.prototype.getFullYear()                以本地时间为标准，返回指定日期的年份
+        Date.prototype.getUTCFullYear()             以世界时为标准，返回一个指定的日期对象的年份
+
+        Date.prototype.getMonth()
+        Date.prototype.getUTCMonth()
+
+        Date.prototype.getDate()                根据本地时间，返回一个指定的日期对象为一个月中的哪一日（从1--31）。
+        Date.prototype.getUTCDate()             以世界时为标准，返回一个指定的日期对象为一个月中的第几天
+
+        Date.prototype.getHours()               根据本地时间，返回一个指定的日期对象的小时。
+        Date.prototype.getUTCHours()            以世界时为标准，返回一个指定的日期对象的小时数。
+
+        Date.prototype.getMinutes()
+        Date.prototype.getUTCMinutes()
+
+        Date.prototype.getSeconds()
+        Date.prototype.getUTCSeconds()
+        Date.prototype.getMilliseconds()        根据本地时间，返回一个指定的日期对象的毫秒数。
+        Date.prototype.getUTCMilliseconds()     以世界时为标准，返回一个指定的日期对象的毫秒数。
+
+        Date.prototype.getDay()                 根据本地时间，返回一个具体日期中一周的第几天，0 表示星期天。对于某个月中的第几天
+        Date.prototype.getUTCDay()              以世界时为标准，返回一个指定的日期对象为一星期中的第几天，其中 0 代表星期天。
+    */
+    let date = new Date()
+    let nowTime = Date.now()
+    console.log(date.getFullYear(nowTime));     // 2021
+    console.log(date.getDate());
+    console.log('---');
+    console.log(date.getTime(nowTime));             // 1631788133515
+    console.log(date.getTimezoneOffset(nowTime));   // -480
+
+    console.log('时间设置--->');
+    /*
+        Date.prototype.setDate(dayValue)
+        根据本地时间来指定一个日期对象的天数
+        dayValue：一个整数，表示该月的第几天。
+    */
+    console.log(moment(date.setDate(6)).format());
+
+
+
+    function timeShow(data){
+        let newDate = new Date()
+        return `${newDate.getFullYear(data)}年${newDate.getMonth(data) + 1}月${newDate.getDate(data)}日${newDate.getHours(data)}点${newDate.getMinutes(data)}分${newDate.getSeconds(data)}秒`
+    }
+    console.log(timeShow(nowTime));
+</script>
+</html>

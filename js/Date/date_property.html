@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--
+        Date
+        创建一个 JavaScript Date 实例，该实例呈现时间中的某个时刻。Date 对象则基于 Unix Time Stamp，即自1970年1月1日（UTC）起经过的毫秒数。
+     -->
+     <!--
+        参数
+        Date()构造函数有四种基本形式：
+        new Date();
+        new Date(value);
+        new Date(dateString);
+        new Date(year, monthIndex, day, hours, minutes, seconds, milliseconds)
+      -->
+</body>
+<script>
+    /*
+        参数：
+        1、没有参数：新创建的Date对象表示实例化时刻的日期和时间
+        2、Unix时间戳：一个 Unix 时间戳，它是一个整数值，表示自1970年1月1日00:00:00 UTC（the Unix epoch）以来的毫秒数，忽略了闰秒
+        3、时间戳字符串：表示日期的字符串值。该字符串应该能被 Date.parse() 正确方法识别
+        4、分别提供日期与时间的每一个成员
+    */
+    // 第一个：没有参数
+    console.log(new Date());                // Thu Sep 16 2021 11:51:38 GMT+0800 (中国标准时间)
+
+    // 第二个：Unix时间戳
+    // 获取当前 Unix时间戳
+    let nowUnix1 = Date.now()               // 1631764309999
+    let nowUnix2 = new Date().getTime()     // 1631764309999
+    console.log(nowUnix1,nowUnix2);
+
+    console.log(new Date(nowUnix1));        // Thu Sep 16 2021 11:53:14 GMT+0800 (中国标准时间)
+    console.log(new Date(nowUnix2));        // Thu Sep 16 2021 11:53:14 GMT+0800 (中国标准时间)
+
+    // 第三个参数：时间戳字符串
+    console.log(new Date('2021-09-16 11:11:11'),'-');       // Thu Sep 16 2021 11:11:11 GMT+0800 (中国标准时间)
+    console.log(new Date('2021.09.16 11:11:11'),'.');       // Thu Sep 16 2021 11:11:11 GMT+0800 (中国标准时间)
+    console.log(new Date('2021/09/16 11:11:11'),'/');       // Thu Sep 16 2021 11:11:11 GMT+0800 (中国标准时间)
+    console.log(new Date('2021%09%16 11:11:11'),'%');       // Thu Sep 16 2021 11:11:11 GMT+0800 (中国标准时间)
+    console.log(new Date('2021&09&16 11:11:11'),'&');       // Thu Sep 16 2021 11:11:11 GMT+0800 (中国标准时间)
+    console.log(new Date('2021@09@16 11:11:11'),'@');
+    console.log(new Date('2021#09#16 11:11:11'),'#');
+    console.log(new Date('2021$09$16 11:11:11'),'$');
+    console.log(new Date('2021!09!16 11:11:11'),'!');
+    console.log(new Date('2021*09*16 11:11:11'),'*');
+    console.log(new Date('2021=09=16 11:11:11'),'=');
+
+    // 第四种：分别提供日期与时间的每一个成员 参数个数 2 ~ 7 测试传一个也可
+    console.log('------');
+    console.log(new Date('2021'));                          // Fri Jan 01 2021 08:00:00 GMT+0800 (中国标准时间)
+    console.log(new Date('2021','8'));                      // Wed Sep 01 2021 00:00:00 GMT+0800 (中国标准时间)
+    console.log(new Date('2021','8','16'));                 // Thu Sep 16 2021 00:00:00 GMT+0800 (中国标准时间)
+    console.log(new Date('2021','8','16','11','11','11'));  // Thu Sep 16 2021 11:11:11 GMT+0800 (中国标准时间)
+
+    //  当Date作为构造函数调用并传入多个参数时，所定义参数代表的是当地时间。如果需要使用世界协调时 UTC，使用 new Date(Date.UTC(...)) 和相同参数。
+    console.log(new Date(Date.UTC('2021','8','16','11','11','11')));    // Thu Sep 16 2021 19:11:11 GMT+0800 (中国标准时间)
+
+    /*
+        属性
+        1、Date.prototype (en-US)
+        2、Date.length
+    */
+    //  1、Date.prototype 构造函数
+    console.log(Date.prototype);
+    /*
+        2、Date.length  Date.length 的值是 7。这是该构造函数可接受的参数个数。
+        new Date(year, monthIndex, day, hours, minutes, seconds, milliseconds);
+    */
+    console.log(Date.length);   // 7
+</script>
+</html>
