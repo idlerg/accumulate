@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Javascript 标准内置对象 - Proxy</title>
+  </head>
+  <body>
+    <!--
+        Proxy 对象用于创建一个对象的代理，从而实现基本操作的拦截和自定义（如属性查找、赋值、枚举、函数调用等）。
+    -->
+    <!--
+        handler (en-US)
+            包含捕捉器（trap）的占位符对象，可译为处理器对象。
+        traps
+            提供属性访问的方法。这类似于操作系统中捕获器的概念。
+        target
+            被 Proxy 代理虚拟化的对象。它常被作为代理的存储后端。根据目标验证关于对象不可扩展性或不可配置属性的不变量（保持不变的语义）。
+    -->
+    <!--
+        const p = new Proxy(target, handler)
+        target
+            要使用 Proxy 包装的目标对象（可以是任何类型的对象，包括原生数组，函数，甚至另一个代理）。
+        handler
+            一个通常以函数作为属性的对象，各属性中的函数分别定义了在执行各种操作时代理 p 的行为。
+    -->
+  </body>
+  <script>
+    // let target = {};
+    // let p = new Proxy(target, {});
+
+    // p.a = 37;   // 操作转发到目标
+
+    // console.log(target.a);    // 37. 操作已经被正确地转发
+
+    let target = { url: "http://47.104.187.160:8888/" };
+
+    let api = new Proxy(target, {});
+    api.link = "auth/oauth/token";
+    console.log(target.link);
+
+    module.exports = {
+      dev: {
+        proxyTable: {
+          /*
+           * "/api" -- 以 /api 开头的请求
+           * target -- 换为 target 指定的路径： 传递给http(s)请求的对象
+           * changeOrigin --  是否将主机头的源更改为目标URL
+           * ws -- 是否代理websocket
+           * secure -- 是否验证SSL证书
+           * cookieDomainRewrite -- 重写set-cookie标头的域，删除域名
+           * onProxyRes -- 代理响应事件
+           * pathRewrite -- 重写目标的url路径
+          */
+          "/api": {
+            target: "http://jsonplaceholder.typicode.com",
+            changeOrigin: true,
+            ws: true,
+            pathRewrite: {
+              "^/api": "",
+            },
+          },
+        },
+      },
+    };
+  </script>
+</html>
