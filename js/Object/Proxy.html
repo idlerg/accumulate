@@ -29,40 +29,92 @@
   <script>
     // let target = {};
     // let p = new Proxy(target, {});
-
     // p.a = 37;   // 操作转发到目标
-
     // console.log(target.a);    // 37. 操作已经被正确地转发
 
     let target = { url: "http://47.104.187.160:8888/" };
-
     let api = new Proxy(target, {});
     api.link = "auth/oauth/token";
     console.log(target.link);
 
-    module.exports = {
-      dev: {
-        proxyTable: {
-          /*
-           * "/api" -- 以 /api 开头的请求
-           * target -- 换为 target 指定的路径： 传递给http(s)请求的对象
-           * changeOrigin --  是否将主机头的源更改为目标URL
-           * ws -- 是否代理websocket
-           * secure -- 是否验证SSL证书
-           * cookieDomainRewrite -- 重写set-cookie标头的域，删除域名
-           * onProxyRes -- 代理响应事件
-           * pathRewrite -- 重写目标的url路径
-          */
-          "/api": {
-            target: "http://jsonplaceholder.typicode.com",
-            changeOrigin: true,
-            ws: true,
-            pathRewrite: {
-              "^/api": "",
-            },
-          },
-        },
+    // module.exports = {
+    //   dev: {
+    //     proxyTable: {
+    //       /*
+    //        * "/api" -- 以 /api 开头的请求
+    //        * target -- 换为 target 指定的路径： 传递给http(s)请求的对象
+    //        * changeOrigin --  是否将主机头的源更改为目标URL
+    //        * ws -- 是否代理websocket
+    //        * secure -- 是否验证SSL证书
+    //        * cookieDomainRewrite -- 重写set-cookie标头的域，删除域名
+    //        * onProxyRes -- 代理响应事件
+    //        * pathRewrite -- 重写目标的url路径
+    //       */
+    //       "/api": {
+    //         target: "http://jsonplaceholder.typicode.com",
+    //         changeOrigin: true,
+    //         ws: true,
+    //         pathRewrite: {
+    //           "^/api": "",
+    //         },
+    //       },
+    //     },
+    //   },
+    // };
+
+    //#region
+    /*
+      天禹老师
+      Proxy 标准内置对象 代理
+        拦截对象中任意属性的变化，包括：属性值的读写、属性的添加、属性的删除等
+      Reflect 标准内置对象 反射
+        对源对象的属性进行操作
+    */
+    //#endregion
+    let person = {
+      name: 'xxx',
+      age: 18
+    }
+    let p = new Proxy(person,{})
+    console.log(person);      // {name: 'xxx', age: 18}
+    console.log(p);           // Proxy {name: 'xxx', age: 18}
+
+    // p 修改的地方 Proxy 都可以捕获到 ---代理
+    p.name = 'jjj'
+    console.log(person);      // {name: 'jjj', age: 18}
+    console.log(p);           // Proxy {name: 'jjj', age: 18}
+
+    // 响应式
+    const pp = new Proxy(person, {
+      get(target, propName) {
+        console.log(`有人读取pp 身上的${propName}属性`);
+        return target[propName]
       },
-    };
+      set(target, propName,value) {
+        console.log(`有人修改pp 身上的${propName}属性，并修改为${value}`);
+        target[propName] = value
+      },
+      deleteProperty(target, propName) {
+        console.log(`有人删除了pp 身上的${propName}属性`);
+        return delete target[propName]
+      }
+    })
+
+    // Reflect
+    const ppp = new Proxy(person, {
+      get(target, propName) {
+        console.log(`有人读取ppp身上的${propName}属性`);
+        return Reflect.get(target,propName)
+      },
+      set(target, propName, value) {
+        console.log(`有人修改ppp身上的${propName}属性，并修改为${value}`);
+        Reflect.set(target, propName, value)
+      },
+      deleteProperty(target, propName) {
+        console.log(`有人删除了ppp身上的${propName}属性`);
+        return Reflect.deleteProperty(target, propName)
+      }
+    })
+
   </script>
 </html>
