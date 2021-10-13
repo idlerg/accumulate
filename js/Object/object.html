@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let obj1 = {
+        userName: '喜喜',
+        phone: '17688889999',
+        sex: '女',
+        hobby: ['ready','eat','sleep'],
+        company: '北京汇通电子有限公司',
+        address: '北京望京',
+        work: '前端'
+    }
+    let obj2 = {
+        userName: '',
+        phone: '',
+        sex: '',
+        hobby: [],
+    }
+    let obj3 = {
+        company: '',
+        address: '',
+        work: ''
+    }
+    Object.keys(obj2).forEach(ele => {
+        obj2[ele] = obj1[ele]
+    })
+    console.log(obj2)
+    console.log(Object.entries(obj3))
+    console.log('-=-=-=-')
+    obj3 = Object.entries(obj3).reduce((a, [key, val]) => {
+        console.log(a)
+        console.log([key,val])
+        console.log(key in obj1)
+        // if(key in obj1) a[key] = obj1[key];
+        return a;
+    }, {})
+    console.log(obj3,89)
+
+    // Object.assign()
+    // 用于将所有可枚举属性的值从一个或多个源对象分配到目标对象。它将返回目标对象。
+    const target = { a: 1, b: 2 };
+    const source = { b: 4, c: 5 };
+    const returnedTarget = Object.assign(target, source);
+    console.log(target);            // {a: 1, b: 4, c: 5}
+    console.log(returnedTarget);    // {a: 1, b: 4, c: 5}
+
+    // Object.create()
+    // 创建一个新对象，使用现有的对象来提供新创建的对象的__proto__
+    const person = {
+        isHuman: false,
+        printIntroduction: function() {
+            console.log(`My name is ${this.name}. Am I human? ${this.isHuman}`);
+        }
+    };
+
+    const me = Object.create(person);
+    me.name = 'Matthew';
+    me.isHuman = true;
+    me.printIntroduction(); // My name is Matthew. Am I human? true
+
+    // Object.entries()
+    // Object.entries()方法返回一个给定对象自身可枚举属性的键值对数组
+    // 其排列与使用 for...in 循环遍历该对象时返回的顺序一致（区别在于 for-in 循环还会枚举原型链中的属性）。
+    const object1 = {
+        a: 'somestring',
+        b: 42
+    };
+    console.log(Object.entries(object1));
+    for (const [key, value] of Object.entries(object1)) {
+        console.log(`${key} --- ${value}`);
+    }
+</script>
+</html>
